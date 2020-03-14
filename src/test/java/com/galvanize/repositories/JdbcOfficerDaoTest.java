@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,6 +27,11 @@ class JdbcOfficerDaoTest {
         assertFalse(officers.isEmpty());
     }
 
-    
+    @Test
+    void findOfficerById() {
+        Optional<Officer> officer = jdbcOfficerDao.findById(3L);
+        assertTrue(officer.isPresent());
+        assertNotNull(officer.get().getId());
+    }
 
 }
