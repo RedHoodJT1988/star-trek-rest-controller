@@ -28,6 +28,12 @@ class JdbcOfficerDaoTest {
     }
 
     @Test
+    void existsById() {
+        boolean exists = jdbcOfficerDao.exists(2L);
+        assertTrue(exists);
+    }
+
+    @Test
     void findOfficerById() {
         Optional<Officer> officer = jdbcOfficerDao.findById(3L);
         assertTrue(officer.isPresent());
