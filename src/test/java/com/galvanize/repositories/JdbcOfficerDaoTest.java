@@ -34,12 +34,12 @@ class JdbcOfficerDaoTest {
         assertTrue(exists);
     }
 
-    @Test
-    void findOfficerById() {
-        Optional<Officer> officer = jdbcOfficerDao.findById(3L);
-        assertTrue(officer.isPresent());
-        assertNotNull(officer.get().getId());
-    }
+        @Test
+        void findOfficerById() {
+            Optional<Officer> officer = jdbcOfficerDao.findById(3L);
+            assertTrue(officer.isPresent());
+            assertNotNull(officer.get().getId());
+        }
 
     @Test
     void createNewOfficer() {

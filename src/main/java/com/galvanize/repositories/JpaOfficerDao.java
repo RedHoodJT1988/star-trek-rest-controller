@@ -9,4 +9,5 @@ import java.util.List;
 
 @Repository
 public interface JpaOfficerDao extends JpaRepository<Officer, Long> {
+    List<Officer>findAllByRank(Rank rank);
 }
