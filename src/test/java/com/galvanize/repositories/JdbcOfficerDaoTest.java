@@ -1,6 +1,7 @@
 package com.galvanize.repositories;
 
 import com.galvanize.entities.Officer;
+import com.galvanize.entities.Rank;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,4 +41,11 @@ class JdbcOfficerDaoTest {
         assertNotNull(officer.get().getId());
     }
 
+    @Test
+    void createNewOfficer() {
+        Officer officer = new Officer(Rank.ADMIRAL, "Al", "Simmons");
+        officer = jdbcOfficerDao.save(officer);
+        assertNotNull(officer);
+        assertNotNull(officer.getId());
+    }
 }

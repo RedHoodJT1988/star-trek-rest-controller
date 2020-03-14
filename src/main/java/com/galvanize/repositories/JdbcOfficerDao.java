@@ -5,17 +5,24 @@ import com.galvanize.entities.Rank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
 public class JdbcOfficerDao {
     private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcInsert insertOfficer;
     @Autowired
     public JdbcOfficerDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        insertOfficer = new SimpleJdbcInsert(jdbcTemplate)
+                .withTableName("officers")
+                .usingGeneratedKeyColumns("id");
     }
 
     public Long count() {
@@ -47,5 +54,17 @@ public class JdbcOfficerDao {
                         rs.getString("first_name"),
                         rs.getString("last_name")),id)
         );
+    }
+
+    public Officer save(Officer officer) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("officer_rank", officer.getRank());
+        parameters.put("first_name", officer.getFirstName());
+        parameters.put("last_name", officer.getLastName());
+
+        long newId = insertOfficer.executeAndReturnKey(parameters).longValue();
+        officer.setId(newId);
+
+        return officer;
     }
 }
