@@ -48,4 +48,15 @@ class JdbcOfficerDaoTest {
         assertNotNull(officer);
         assertNotNull(officer.getId());
     }
+
+    @Test
+    void deleteOfficer() {
+        Officer officer = new Officer(Rank.ADMIRAL, "Al", "Simmons");
+        officer = jdbcOfficerDao.save(officer);
+        long id = officer.getId();
+        assertNotNull(id);
+
+        jdbcOfficerDao.delete(id);
+        assertFalse(jdbcOfficerDao.exists(id));
+    }
 }
