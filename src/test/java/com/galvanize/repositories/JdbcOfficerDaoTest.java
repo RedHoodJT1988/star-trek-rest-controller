@@ -5,6 +5,7 @@ import com.galvanize.entities.Rank;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,12 +35,12 @@ class JdbcOfficerDaoTest {
         assertTrue(exists);
     }
 
-        @Test
-        void findOfficerById() {
-            Optional<Officer> officer = jdbcOfficerDao.findById(3L);
-            assertTrue(officer.isPresent());
-            assertNotNull(officer.get().getId());
-        }
+    @Test
+    void findOfficerById() {
+        Optional<Officer> officer = jdbcOfficerDao.findById(3L);
+        assertTrue(officer.isPresent());
+        assertNotNull(officer.get().getId());
+    }
 
     @Test
     void createNewOfficer() {
