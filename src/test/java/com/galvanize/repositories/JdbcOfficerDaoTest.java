@@ -18,24 +18,28 @@ class JdbcOfficerDaoTest {
     JdbcOfficerDao jdbcOfficerDao;
 
     @Test
+    @Transactional
     void count(){
         Long count = jdbcOfficerDao.count();
         assertEquals(5L, count);
     }
 
     @Test
+    @Transactional
     void findAllOfficers() {
         List<Officer> officers = jdbcOfficerDao.findAll();
         assertFalse(officers.isEmpty());
     }
 
     @Test
+    @Transactional
     void existsById() {
         boolean exists = jdbcOfficerDao.exists(2L);
         assertTrue(exists);
     }
 
     @Test
+    @Transactional
     void findOfficerById() {
         Optional<Officer> officer = jdbcOfficerDao.findById(3L);
         assertTrue(officer.isPresent());
@@ -43,6 +47,7 @@ class JdbcOfficerDaoTest {
     }
 
     @Test
+    @Transactional
     void createNewOfficer() {
         Officer officer = new Officer(Rank.ADMIRAL, "Al", "Simmons");
         officer = jdbcOfficerDao.save(officer);
@@ -51,6 +56,7 @@ class JdbcOfficerDaoTest {
     }
 
     @Test
+    @Transactional
     void deleteOfficer() {
         Officer officer = new Officer(Rank.ADMIRAL, "Al", "Simmons");
         officer = jdbcOfficerDao.save(officer);
